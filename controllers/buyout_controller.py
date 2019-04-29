@@ -1,2 +1,6 @@
+from database.buy_event import buy_event
+
+
 def buyout_booking(bookingId):
-    return True
+    buy_event(bookingId)
+    return "True"
