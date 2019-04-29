@@ -9,7 +9,10 @@ def select_events(cityId, startDate, endDate):
     result_events = list()
     with con:
         cur = con.cursor()
-        cur.execute("SELECT * FROM Events WHERE CityID=cityId AND Start_date=startDate AND End_date=endDate")
+        task = '''SELECT * FROM EVENTS WHERE City_ID = ? AND StartDate = ? AND EndDate = ?'''
+        values = (cityId, startDate, endDate)
+
+        cur.execute(task, values)
         rows = cur.fetchall()
 
         for x in rows:
@@ -28,7 +31,8 @@ def select_events(cityId, startDate, endDate):
 def select_event_by_id(event_id):
     with con:
         cur = con.cursor()
-        cur.execute("SELECT * FROM Events WHERE EventId=event_id")
+        task = '''SELECT * FROM EVENTS WHERE Event_id = ?'''
+        cur.execute(task, (event_id,))
         result = cur.fetchone()
         event_id = result[0]
         name = result[1]
