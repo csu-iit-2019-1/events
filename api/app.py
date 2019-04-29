@@ -1,8 +1,5 @@
 import json
-from http.client import HTTPResponse
-
 from flask import Flask, request
-
 from controllers.buyout_controller import buyout_booking
 from controllers.getting_events_controller import get_events, get_event_by_id
 from controllers.booking_controller import createBooking
