@@ -7,11 +7,12 @@ def insert_booking(event_id, user_id, counts):
     with lite.connect(DATABASE_NAME) as con:
         cur = con.cursor()
         task = '''INSERT INTO main.BOOKING(Event_id, Seats, user_id, Status) VALUES (?,?,?,?)'''
-        values = (event_id, user_id, counts, "Куплено")
+        values = (event_id, user_id, counts, "Забронировано")
 
         cur.execute(task, values)
-        current_seats = cur.execute('''SELECT FreeSpace from main.EVENTS where Event_id = ?''', (event_id,)).fetchone()[
-            0]
+        current_seats = cur.execute('''SELECT FreeSpace from main.EVENTS where Event_id = ?''', (event_id,)).fetchone()[0]
+        if current_seats < counts:
+            return -1
         task1 = '''UPDATE main.EVENTS SET FreeSpace = ? WHERE Event_id = ?'''
         values1 = (current_seats - counts, event_id)
 

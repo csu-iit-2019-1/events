@@ -1,12 +1,12 @@
 import sqlite3 as lite
 from config import DATABASE_NAME
-from models.event import Event
+
 
 def select_events(cityId, startDate, endDate):
     result_events = list()
     with lite.connect(DATABASE_NAME) as con:
         cur = con.cursor()
-        task = '''SELECT * FROM main.EVENTS WHERE City_ID = ? AND StartDate BETWEEN ? AND ? AND EndDate BETWEEN ? AND ?'''
+        task = '''SELECT * FROM main.EVENTS WHERE City_ID = ? AND StartDate BETWEEN ? AND ? AND EndDate BETWEEN ? AND ? AND FreeSpace !=0 '''
         values = (cityId, startDate, endDate, startDate, endDate)
 
         cur.execute(task, values)
@@ -21,7 +21,9 @@ def select_events(cityId, startDate, endDate):
             start_date = x[5]
             end_date = x[6]
             free_space = x[7]
-            result_events.append({"event_id":event_id, "name":name, "cityId":cityId, "price":price, "description":description, "start_date":start_date, "end_date":end_date, "free_space":free_space})
+            result_events.append(
+                {"event_id": event_id, "name": name, "cityId": cityId, "price": price, "description": description,
+                 "start_date": start_date, "end_date": end_date, "free_space": free_space})
     return result_events
 
 
@@ -39,7 +41,7 @@ def select_event_by_id(event_id):
         start_date = result[5]
         end_date = result[6]
         free_space = result[7]
-        event = {"event_id":event_id, "name":name, "cityId":cityId, "price":price, "description":description, "start_date":start_date, "end_date":end_date, "free_space":free_space}
+        event = {"event_id": event_id, "name": name, "cityId": cityId, "price": price, "description": description,
+                 "start_date": start_date, "end_date": end_date, "free_space": free_space}
     return event
 #
-
