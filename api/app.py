@@ -16,7 +16,7 @@ def getEvents():
     return json.dumps(get_events(city, startDate, endDate))
 
 
-@app.route('/events/getEvent/<event_id>', methods=['GET'])
+@app.route('/events/<event_id>', methods=['GET'])
 def getEvent(event_id):
     return json.dumps(get_event_by_id(event_id))
 
