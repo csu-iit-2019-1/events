@@ -2,7 +2,7 @@ import json
 from flask import Flask, request
 from controllers.buyout_controller import buyout_booking
 from controllers.getting_events_controller import get_events, get_event_by_id
-from controllers.booking_controller import createBooking
+# from controllers.booking_controller import createBooking
 from config import ADDRESS, PORT
 
 app = Flask(__name__)
@@ -10,9 +10,9 @@ app = Flask(__name__)
 
 @app.route('/events/getEvents', methods=['POST'])
 def getEvents():
-    city = request.args.get('cityId')
-    startDate = request.args.get('startDate')
-    endDate = request.args.get('endDate')
+    city = request.form['cityId']
+    startDate = request.form['startDate']
+    endDate = request.form['endDate']
     return json.dumps(get_events(city, startDate, endDate))
 
 
@@ -21,12 +21,13 @@ def getEvent(event_id):
     return json.dumps(get_event_by_id(event_id))
 
 
-@app.route('events/booking/<event_id>', methods=['GET'])
+@app.route('/events/booking/<event_id>', methods=['GET'])
 def bookingEvent(event_id, count_adults, count_children):
-    return createBooking(event_id, count_adults, count_children)
+    # return createBooking(event_id, count_adults, count_children)
+    pass
 
 
-@app.route('events/byuing/<booking_id>', methods=['GET'])
+@app.route('/events/byuing/<booking_id>', methods=['GET'])
 def byuingEvent(booking_id):
     return buyout_booking(booking_id)
 
