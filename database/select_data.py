@@ -42,12 +42,4 @@ def select_event_by_id(event_id):
         event = {"event_id":event_id, "name":name, "cityId":cityId, "price":price, "description":description, "start_date":start_date, "end_date":end_date, "free_space":free_space}
     return event
 #
-#
-# def insertBooking(event_name, count_adults, count_children):
-#     try:
-#         with con:
-#             cur = con.cursor()
-#             event_id = cur.execute("SELECT Id FROM Events WHERE Name=event_name AND Free_space != 0").fetchall()
-#             cur.execute("INSERT INTO Booking VALUES(event_id, count_adults, count_children)")
-#     except:
-#         return False
+

@@ -1,5 +1,5 @@
-# from database.select_data import insertBooking
-#
-#
-# def createBooking(event_name, count_adults, count_children):
-#     return insertBooking(event_name, count_adults, count_children)
+from database.insert_booking import insert_booking
+
+
+def create_booking(event_id, user_id, counts):
+    return insert_booking(event_id, user_id, counts)
