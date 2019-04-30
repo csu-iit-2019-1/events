@@ -29,15 +29,16 @@ def bookingEvent(event_id):
         user_id = request.form['userId']
         count_adults = request.form['countOfPersonsAdults']
         counts_children = request.form['countOfPersonsChildren']
-        return str(create_booking(event_id, user_id, int(count_adults) + int(counts_children)))
+        result = str(create_booking(event_id, user_id, int(count_adults) + int(counts_children)))
+        return result
     except requests.RequestException:
         return "Invalid Data - no such free seats"
-
 
 
 @app.route('/events/byuing/<booking_id>', methods=['GET'])
 def byuingEvent(booking_id):
     return buyout_booking(booking_id)
+
 
 if __name__ == '__main__':
     app.run(host=ADDRESS, port=PORT)
