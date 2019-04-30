@@ -27,9 +27,10 @@ def get_event(event_id):
 @app.route('/events/booking/<event_id>', methods=['POST'])
 def book_event(event_id):
     try:
-        user_id = request.form['userId']
-        count_adults = request.form['countOfPersonsAdults']
-        counts_children = request.form['countOfPersonsChildren']
+        params_data = request.get_json()
+        user_id = params_data['userId']
+        count_adults = params_data['countOfPersonsAdults']
+        counts_children = params_data['countOfPersonsChildren']
         result = str(create_booking(event_id, user_id, int(count_adults) + int(counts_children)))
         return result
     except requests.RequestException:
