@@ -12,9 +12,10 @@ app = Flask(__name__)
 
 @app.route('/events/getEvents', methods=['POST'])
 def getEvents():
-    city = request.form['cityId']
-    startDate = request.form['startDate']
-    endDate = request.form['endDate']
+    t = request.get_json()
+    city = t['cityId']
+    startDate = t['startDate']
+    endDate = t['endDate']
     return json.dumps(get_events(city, startDate, endDate))
 
 

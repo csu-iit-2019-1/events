@@ -6,7 +6,7 @@ def select_events(cityId, startDate, endDate):
     result_events = list()
     with lite.connect(DATABASE_NAME) as con:
         cur = con.cursor()
-        task = '''SELECT * FROM main.EVENTS WHERE City_ID = ? AND StartDate BETWEEN ? AND ? AND EndDate BETWEEN ? AND ? AND FreeSpace !=0 '''
+        task = '''SELECT * FROM main.EVENTS WHERE City_ID = ? AND date(StartDate) BETWEEN date(?) AND date(?) AND date(EndDate) BETWEEN date(?) AND date(?) AND FreeSpace !=0 '''
         values = (cityId, startDate, endDate, startDate, endDate)
 
         cur.execute(task, values)
