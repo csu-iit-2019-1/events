@@ -72,7 +72,7 @@ def buy_event():
     logging.info("start buying booked event task...")
     try:
         logging.info("start parse request data")
-        booking_id = request.get_json()[0]
+        booking_id = request.get_json()['bookingId']
     except requests.exceptions.HTTPError:
         logging.error("invalid request data")
         return "Invalid request data"
