@@ -11,21 +11,21 @@ app = Flask(__name__)
 
 
 @app.route('/events/getEvents', methods=['POST'])
-def getEvents():
-    t = request.get_json()
-    city = t['cityId']
-    startDate = t['startDate']
-    endDate = t['endDate']
+def get_events():
+    request_params = request.get_json()
+    city = request_params['cityId']
+    startDate = request_params['startDate']
+    endDate = request_params['endDate']
     return json.dumps(get_events(city, startDate, endDate))
 
 
 @app.route('/events/<event_id>', methods=['GET'])
-def getEvent(event_id):
+def get_event(event_id):
     return json.dumps(get_event_by_id(event_id))
 
 
 @app.route('/events/booking/<event_id>', methods=['POST'])
-def bookingEvent(event_id):
+def book_event(event_id):
     try:
         user_id = request.form['userId']
         count_adults = request.form['countOfPersonsAdults']
@@ -37,7 +37,7 @@ def bookingEvent(event_id):
 
 
 @app.route('/events/byuing/<booking_id>', methods=['GET'])
-def byuingEvent(booking_id):
+def buy_event(booking_id):
     return buyout_booking(booking_id)
 
 
