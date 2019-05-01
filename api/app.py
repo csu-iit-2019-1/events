@@ -67,7 +67,7 @@ def book_event(event_id):
         return "Not enough free space"
 
 
-@app.route('/events/byuing', methods=['POST'])
+@app.route('/events/buying', methods=['POST'])
 def buy_event():
     logging.info("start buying booked event task...")
     try:
