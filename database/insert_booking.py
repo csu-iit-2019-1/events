@@ -10,9 +10,8 @@ def insert_booking(event_id, user_id, counts):
         values = (event_id, user_id, counts, "Забронировано")
 
         cur.execute(task, values)
-        current_seats = cur.execute('''SELECT FreeSpace from main.EVENTS where Event_id = ?''', (event_id,)).fetchone()[0]
-        if current_seats < counts:
-            return -1
+        current_seats = cur.execute(
+            '''SELECT FreeSpace from main.EVENTS where Event_id = ?''', (event_id,)).fetchone()[0]
         task1 = '''UPDATE main.EVENTS SET FreeSpace = ? WHERE Event_id = ?'''
         values1 = (current_seats - counts, event_id)
 
@@ -22,4 +21,4 @@ def insert_booking(event_id, user_id, counts):
         task2 = '''SELECT Booking_id FROM main.BOOKING WHERE
          Booking_id = (SELECT MAX(Booking_id)  FROM main.BOOKING);'''
         booking_id = cur.execute(task2).fetchone()[0]
-    return booking_id
+    return {"bookingId": booking_id}
