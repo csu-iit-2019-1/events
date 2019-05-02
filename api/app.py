@@ -28,7 +28,7 @@ def get_events():
         events = get_events_on_period(city, start_date, end_date)
         logging.info("end getting events for period task")
         return json.dumps(events)
-    except ValueError:
+    except requests.exceptions.RequestException:
         logging.error("cannot get events for period")
         return "Cannot get events for period"
 
@@ -40,7 +40,7 @@ def get_event(event_id):
         event = get_event_by_id(event_id)
         logging.info("end getting event by id task")
         return json.dumps(event)
-    except ValueError:
+    except requests.exceptions.RequestException:
         logging.error("event not found")
         return "Event not found"
 
@@ -62,7 +62,7 @@ def book_event():
         result = json.dumps(create_booking(event_id, user_id, int(count_adults) + int(counts_children)))
         logging.info("end booking event by id task")
         return result
-    except ValueError:
+    except requests.exceptions.RequestException:
         logging.error("not enough free space")
         return "Not enough free space"
 
@@ -81,7 +81,7 @@ def buy_event():
         buyout = buyout_booking(booking_id)
         logging.info("end buying booked task")
         return json.dumps(buyout)
-    except ValueError:
+    except requests.exceptions.RequestException:
         logging.error("invalid booking id")
         return "Invalid booking id"
 
